@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import '@fontsource/poppins/400.css'; // Ensure the Poppins font is imported
 
 const navItems = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
-  { name: 'Initiatives', href: '/initiatives' },
-  { name: 'Success Stories', href: '/success-stories' },
+  { name: 'Proposals', href: '/initiatives' },
+  { name: 'Truthful Testimonies', href: '/success-stories' },
   { name: 'Get Involved', href: '/get-involved' },
   { name: 'FAQs', href: '/faq' },
   { name: 'Contact', href: '/contact' },
@@ -19,15 +20,22 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-md">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <Link href="/" className="font-bold text-xl text-primary transition-colors duration-300 hover:text-primary-dark">Voices of Change</Link>
-          <div className="hidden md:flex space-x-4">
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8 h-16"> {/* Increased navbar height */}
+        <div className="flex justify-between items-center h-full">
+          <Link href="/" className="flex items-center">
+            <img 
+              src="/images/logo.png" // Path to your logo image
+              alt="Logo"
+              className="h-14 w-auto mr-3 object-contain" // Logo height, adjust as needed
+              style={{ padding: '0', margin: '0' }} // Remove any default padding or margin
+            />
+          </Link>
+          <div className="hidden md:flex space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-primary transition-colors duration-300"
+                className="text-gray-800 hover:text-primary transition-colors duration-300 text-lg font-bold font-poppins" // Added font-bold here
               >
                 {item.name}
               </Link>
@@ -50,7 +58,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="block px-3 py-2 text-gray-600 hover:text-primary transition-colors duration-300"
+                className="block px-3 py-2 text-gray-600 hover:text-primary transition-colors duration-300 text-lg font-bold font-poppins" // Added font-bold here
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}

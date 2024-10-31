@@ -34,35 +34,27 @@ export default function FAQ() {
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold mb-8">Some common questions were often asked</h1>
-      <div className="space-y-4">
+      <h1 className="text-4xl font-bold text-center mb-12">Some common questions we're often asked</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className={`p-6 rounded-lg shadow-md transition-all duration-300 ${
-              activeIndex === index ? 'bg-green-600 text-white' : 'bg-white text-gray-900'
+            className={`p-6 rounded-lg shadow-md transition-all duration-300 cursor-pointer ${
+              activeIndex === index ? 'bg-cyan-600 text-white' : 'bg-white text-gray-900'
             }`}
+            onClick={() => toggleFAQ(index)}
           >
-            <button
-              className="w-full text-left text-xl font-semibold flex justify-between items-center focus:outline-none"
-              onClick={() => toggleFAQ(index)}
-            >
-              {faq.question}
+            <div className="text-xl font-semibold flex justify-between items-center">
+              <span>{faq.question}</span>
               <span className={`transform transition-transform ${activeIndex === index ? 'rotate-45' : ''}`}>
                 {activeIndex === index ? '×' : '+'}
               </span>
-            </button>
-            <div
-              className={`overflow-hidden transition-all duration-300 ${
-                activeIndex === index ? 'max-h-40' : 'max-h-0'
-              }`}
-            >
-              {activeIndex === index && (
-                <p className="mt-4 text-lg">
-                  {faq.answer}
-                </p>
-              )}
             </div>
+            {activeIndex === index && (
+              <p className="mt-4 text-lg">
+                {faq.answer}
+              </p>
+            )}
           </div>
         ))}
       </div>

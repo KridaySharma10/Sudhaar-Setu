@@ -1,44 +1,43 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import Link from 'next/link' // Ensure this import is present
 
 const successStories = [
   {
-    title: "Empowering Women in Tech",
-    description: "How our Women's Safety Initiative led to the creation of a successful tech startup.",
-    image: "/images/success-story-1.jpg",
+    title: "Ms. Doe, John",
+    description: "'This organisation has the potential, but considering it is still in inception it will take time but it can solve many lacunas'",
+    image: "/images/avatar-3.png",
   },
   {
-    title: "Breaking Barriers in Education",
-    description: "A story of how our Inclusive Education program changed the life of a child with special needs.",
-    image: "/images/success-story-2.jpg",
+    title: "Mr. Michael Myers",
+    description: "They need a professional expansion, their ideas and proposals might be slightly ambitious but with the proper sponsorship and support they can make it happen",
+    image: "/images/avatar-1.png",
   },
   {
-    title: "From Grassroots to Gold",
-    description: "The journey of an athlete from our Sports Engagement program to national recognition.",
-    image: "/images/success-story-3.jpg",
+    title: "Mr. Dear, John",
+    description: "It's hard to comment anything in the initial stages but this is good, all the best team.",
+    image: "/images/avatar-2.png",
   },
 ]
 
 export default function SuccessStories() {
   return (
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-12">Success Stories</h1>
+      <h1 className="text-4xl font-bold text-center mb-12">Truthful Testimonies</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {successStories.map((story, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
-            <Image 
-              src={story.image} 
-              alt={story.title} 
-              width={600} 
-              height={400} 
-              className="w-full h-48 object-cover"
-            />
+            <div className="flex justify-center items-center">
+              <Image 
+                src={story.image} 
+                alt={story.title} 
+                width={150} // Adjust size as needed
+                height={150} // Adjust size as needed
+                className="rounded-full object-cover"
+              />
+            </div>
             <div className="p-6">
               <h2 className="text-xl font-semibold mb-2">{story.title}</h2>
               <p className="text-gray-600 mb-4">{story.description}</p>
-              <Link href="#" className="text-primary font-semibold hover:underline">
-                Read Full Story
-              </Link>
             </div>
           </div>
         ))}

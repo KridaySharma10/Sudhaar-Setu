@@ -1,32 +1,46 @@
-'use client'
+// app/contact/page.tsx
+'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
+import { db } from '../firebase'; // Import the Firestore instance
+import { collection, addDoc } from 'firebase/firestore';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
-  })
+  });
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission here
-    console.log(formData)
-    // Reset form
-    setFormData({ name: '', email: '', message: '' })
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      // Add contact message to Firestore
+      await addDoc(collection(db, 'contactMessages'), {
+        ...formData,
+        createdAt: new Date()
+      });
+      console.log('Contact message:', formData);
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err) {
+      console.error('Error adding document:', err);
+      setError('Failed to send your message. Please try again.');
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-16">
       <h1 className="text-4xl font-bold text-center mb-12">Contact Us</h1>
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <div className="max-w-2xl mx-auto">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -79,5 +93,5 @@ export default function Contact() {
         </form>
       </div>
     </div>
-  )
+  );
 }

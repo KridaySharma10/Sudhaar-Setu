@@ -6,7 +6,7 @@ import Footer from './components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Voices of Change for a Better India',
+  title: 'सुधार Setu for a Better India',
   description: 'Empowering citizens to build a brighter future for our nation',
 }
 

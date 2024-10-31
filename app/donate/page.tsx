@@ -6,12 +6,9 @@ import Image from 'next/image'
 export default function Donate() {
   const [amount, setAmount] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle donation submission here
-    console.log('Donation amount:', amount)
-    // Reset form
-    setAmount('')
+  const handleDonate = () => {
+    // Redirect to Coinbase Commerce Checkout
+    window.open('https://commerce.coinbase.com/checkout/f56623c6-cc09-43b2-af78-0e9435cf19b2', '_blank')
   }
 
   return (
@@ -20,10 +17,10 @@ export default function Donate() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
           <Image 
-            src="/images/donate-bg.jpg" 
+            src="/images/donate now.jpeg" 
             alt="Donate" 
-            width={800} 
-            height={600} 
+            width={600} 
+            height={0} 
             className="rounded-lg shadow-md"
           />
           <div className="mt-8">
@@ -41,7 +38,7 @@ export default function Donate() {
           </div>
         </div>
         <div>
-          <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-8">
+          <form onSubmit={(e) => { e.preventDefault(); handleDonate(); }} className="bg-white rounded-lg shadow-md p-8">
             <h3 className="text-2xl font-semibold mb-6">Make a Donation</h3>
             <div className="mb-6">
               <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-2">

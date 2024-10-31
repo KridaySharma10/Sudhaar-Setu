@@ -11,16 +11,9 @@ const involvementOptions = [
     description: "Support our initiatives financially. Every contribution helps us reach more people.",
     link: "/donate"
   },
-  {
-    title: "Spread the Word",
-    description: "Share our mission with your network and help us grow our community.",
-    link: "/resources"
-  },
-  {
-    title: "Attend Events",
-    description: "Participate in our events and connect with like-minded individuals.",
-    link: "/events"
-  }
+  
+
+   
 ]
 
 export default function GetInvolved() {

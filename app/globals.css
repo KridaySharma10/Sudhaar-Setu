@@ -1,21 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --primary: #ff0000;
-  --primary-dark: #00b3ff;
-  --secondary: #4ECDC4;
-  --secondary-dark: #45B7AA;
-  --accent: #FFD93D;
-  --background: #F7F7F7;
-  --text: #333333;
+  --primary: #2E3A87;
+  --primary-dark: #1B2656;
+  --secondary: #FFD700;
+  --secondary-dark: #B8860B;
+  --accent: #FF4500;
+  --background: #F0F4F8;
+  --text: #000632;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   background-color: var(--background);
   color: var(--text);
 }
@@ -52,4 +53,12 @@ body {
 
 .hover\:bg-accent-dark:hover {
   background-color: #FFB300; /* Darker shade of accent color */
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 5s linear infinite;
 }

@@ -1,9 +1,9 @@
-import Link from 'next/link'
-import { Book, FileText, Video, Download } from 'lucide-react'
+import Link from 'next/link';
+import { Book, FileText, Video, Download } from 'lucide-react';
 
 const resources = [
   {
-    title: "Women's Safety Handbook",
+    title: "Women&apos;s Safety Handbook", // Escape the single quote
     description: "A comprehensive guide on personal safety and empowerment.",
     icon: Book,
     link: "#",
@@ -26,7 +26,7 @@ const resources = [
     icon: Download,
     link: "#",
   },
-]
+];
 
 export default function Resources() {
   return (
@@ -47,11 +47,11 @@ export default function Resources() {
         ))}
       </div>
       <div className="mt-12 text-center">
-        <p className="text-lg mb-4">Can't find what you're looking for?</p>
+        <p className="text-lg mb-4">Can&apos;t find what you&apos;re looking for?</p> {/* Escape the single quote */}
         <Link href="/contact" className="bg-secondary text-white px-6 py-3 rounded-full font-semibold hover:bg-secondary-dark transition-colors">
           Contact Us for More Resources
         </Link>
       </div>
     </div>
-  )
+  );
 }

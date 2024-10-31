@@ -7,14 +7,14 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-bold text-lg mb-4">Voices of Change</h3>
+            <h3 className="font-bold text-lg mb-4">सुधार सेतु</h3>
             <p className="text-sm">Empowering citizens to build a brighter future for our nation</p>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li><Link href="/initiatives" className="hover:text-primary transition-colors">Initiatives</Link></li>
+              <li><Link href="/initiatives" className="hover:text-primary transition-colors">initiatives</Link></li>
               <li><Link href="/get-involved" className="hover:text-primary transition-colors">Get Involved</Link></li>
               <li><Link href="/about" className="hover:text-primary transition-colors">About</Link></li>
             </ul>
@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-gray-700 pt-4 text-center">
-          <p>&copy; 2023 Voices of Change. All rights reserved.</p>
+          <p>&copy; 2024 सुधार Setu. All rights reserved.</p>
         </div>
       </div>
     </footer>
