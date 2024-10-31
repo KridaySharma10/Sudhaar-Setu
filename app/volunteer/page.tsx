@@ -1,133 +1,128 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
-import { db } from '../firebase'; // Import the Firestore instance
-import { collection, addDoc } from 'firebase/firestore';
 
 export default function Volunteer() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    resume: null // New field for resume
+    resume: null as File | null,
+    message: ''
   });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: name === 'resume' ? files[0] : value // Handle file input for resume
-    });
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === 'resume' && files ? files[0] : value // Handle file input for resume
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, email, phone, resume } = formData;
-
-    if (!resume) {
-      setError('Please upload your resume.');
-      return;
+    
+    // Prepare form data for submission
+    const data = new FormData();
+    for (const key in formData) {
+      data.append(key, formData[key]);
     }
 
     try {
-      // Create a FormData object to send the resume as well
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', name);
-      formDataToSend.append('email', email);
-      formDataToSend.append('phone', phone);
-      formDataToSend.append('resume', resume);
-      // Add volunteer data to Firestore
-      await addDoc(collection(db, 'volunteers'), {
-        name,
-        email,
-        phone,
-        resumeName: resume.name,
-        createdAt: new Date()
+      const response = await fetch('/api/volunteer', {
+        method: 'POST',
+        body: data,
       });
-      console.log('Volunteer data:', formData);
-      setSuccess('Your application has been submitted successfully!');
-      // Reset form
-      setFormData({ name: '', email: '', phone: '', resume: null });
-      setError('');
-    } catch (err) {
-      console.error('Error adding document:', err);
-      setError('Failed to submit your application. Please try again.');
-      setSuccess('');
+
+      if (response.ok) {
+        // Handle successful submission
+        alert('Thank you for volunteering!');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          resume: null,
+          message: ''
+        });
+      } else {
+        // Handle error
+        alert('There was an error submitting your form. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('There was an error submitting your form. Please try again.');
     }
   };
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-12">Join Us as a Volunteer</h1>
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      {success && <p className="text-green-500 text-center">{success}</p>}
-      <div className="max-w-2xl mx-auto">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            />
-          </div>
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-              Phone
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            />
-          </div>
-          <div>
-            <label htmlFor="resume" className="block text-sm font-medium text-gray-700">
-              Upload Your Resume
-            </label>
-            <input
-              type="file"
-              id="resume"
-              name="resume"
-              accept=".pdf,.doc,.docx" // Accept only specific file types
-              onChange={handleChange}
-              required
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            />
-          </div>
-          <div>
-            <button type="submit" className="w-full bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors">
-              Apply Now
-            </button>
-          </div>
-        </form>
-      </div>
+      <h1 className="text-4xl font-bold text-center mb-8">Volunteer With Us</h1>
+      <form onSubmit={handleSubmit} className="max-w-lg mx-auto">
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-lg font-medium">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-lg font-medium">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="phone" className="block text-lg font-medium">Phone</label>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="resume" className="block text-lg font-medium">Resume</label>
+          <input
+            type="file"
+            name="resume"
+            id="resume"
+            onChange={handleChange}
+            accept=".pdf,.doc,.docx"
+            required
+            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="message" className="block text-lg font-medium">Message</label>
+          <textarea
+            name="message"
+            id="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={4}
+            required
+            className="mt-1 block w-full p-2 border border-gray-300 rounded"
+          ></textarea>
+        </div>
+        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+          Submit
+        </button>
+      </form>
     </div>
   );
 }

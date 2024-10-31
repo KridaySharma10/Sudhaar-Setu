@@ -1,11 +1,10 @@
-// src/components/MapWithMarkers.tsx
+'use client';
 
-'use client'
+import React from 'react';
+import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps';
 
-import React from 'react'
-import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
-
-const geoUrl = "https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson";
+const geoUrl =
+  "https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/countries.geojson";
 
 const impactLocations = [
   { name: 'Delhi, India', coordinates: [77.2090, 28.6139] },
@@ -14,13 +13,17 @@ const impactLocations = [
   { name: 'Sydney, Australia', coordinates: [151.2093, -33.8688] },
   { name: 'Nairobi, Kenya', coordinates: [36.8219, -1.2921] },
   { name: 'Buenos Aires, Argentina', coordinates: [-58.3816, -34.6037] },
-]
+];
 
-const MapWithMarkers = () => {
+interface GeographyType {
+  rsmKey: string;
+}
+
+const MapWithMarkers: React.FC = () => {
   return (
     <ComposableMap projection="geoMercator" projectionConfig={{ scale: 160 }}>
       <Geographies geography={geoUrl}>
-        {({ geographies }) =>
+        {({ geographies }: { geographies: GeographyType[] }) =>
           geographies.map((geo) => (
             <Geography key={geo.rsmKey} geography={geo} fill="#EAEAEA" stroke="#FFFFFF" />
           ))
@@ -35,7 +38,7 @@ const MapWithMarkers = () => {
         </Marker>
       ))}
     </ComposableMap>
-  )
-}
+  );
+};
 
-export default MapWithMarkers
+export default MapWithMarkers;

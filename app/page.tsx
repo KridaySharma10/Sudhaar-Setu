@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, MapPin, Users, Trophy, Heart, ArrowBigDownDash } from 'lucide-react';
 import ParticleBackground from './components/ParticleBackground';
-import ImpactMap from './components/ImpactMap';
 import SuccessStory from './components/SuccessStory';
 import StatCard from './components/StatCard';
 import MapWithMarkers from './components/MapWithMarkers'; // Ensure this import is correct
@@ -67,16 +66,7 @@ export default function Home() {
         </motion.div>
       </div>
 
-      {/* Impact Map Section */}
-      <section id="impact-map" className="py-20 bg-gradient-to-b from-background to-background-light">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text">
-            Our Impact Across India
-          </h2>
-          <ImpactMap />
-        </div>
-      </section>
-
+    
       {/* Success Stories */}
       <section id="success-stories" className="py-20">
         <div className="container mx-auto px-4">
@@ -137,7 +127,7 @@ export default function Home() {
             </p>
             <Link 
               href="/join"
-              className="inline-flex items-center px-8 py-4 rounded-full bg-primary hover:bg-primary-dark transition-all transform hover:scale-105 text-white font-semibold text-lg"
+              className="inline-flex items-center px-8sa py-4 rounded-full bg-primary hover:bg-primary-dark transition-all transform hover:scale-105 text-white font-semibold text-lg"
             >
               Start Your Journey
               <ArrowRight className="ml-2 h-5 w-5" />

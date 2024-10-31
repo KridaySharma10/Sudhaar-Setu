@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const faqs = [
   {
-    question: "What is the difference between a 'Coin' and a 'Token' on the site?",
+    question: "What is the difference between a &apos;Coin&apos; and a &apos;Token&apos; on the site?",
     answer: "Coins usually refer to cryptocurrencies that have their own blockchain (e.g., Bitcoin, Ethereum), while tokens are built on existing blockchains (e.g., ERC-20 tokens on Ethereum)."
   },
   {
@@ -26,15 +26,15 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [activeIndex, setActiveIndex] = useState(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const toggleFAQ = (index) => {
+  const toggleFAQ = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-4xl font-bold text-center mb-12">Some common questions we're often asked</h1>
+      <h1 className="text-4xl font-bold text-center mb-12">Some common questions we&apos;re often asked</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {faqs.map((faq, index) => (
           <div
@@ -44,17 +44,8 @@ export default function FAQ() {
             }`}
             onClick={() => toggleFAQ(index)}
           >
-            <div className="text-xl font-semibold flex justify-between items-center">
-              <span>{faq.question}</span>
-              <span className={`transform transition-transform ${activeIndex === index ? 'rotate-45' : ''}`}>
-                {activeIndex === index ? '×' : '+'}
-              </span>
-            </div>
-            {activeIndex === index && (
-              <p className="mt-4 text-lg">
-                {faq.answer}
-              </p>
-            )}
+            <h3 className="font-semibold text-lg">{faq.question}</h3>
+            {activeIndex === index && <p className="mt-2">{faq.answer}</p>}
           </div>
         ))}
       </div>

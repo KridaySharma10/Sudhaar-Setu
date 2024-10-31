@@ -20,7 +20,7 @@ export default function Donate() {
             src="/images/donate now.jpeg" 
             alt="Donate" 
             width={600} 
-            height={0} 
+            height={400} // Set a specific height
             className="rounded-lg shadow-md"
           />
           <div className="mt-8">
@@ -31,7 +31,7 @@ export default function Donate() {
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-600">
               <li>Fund educational programs for underprivileged children</li>
-              <li>Support women's safety initiatives</li>
+              <li>Support women&apos;s safety initiatives</li> {/* Escaped apostrophe */}
               <li>Promote social equality and inclusivity</li>
               <li>Encourage sports engagement across communities</li>
             </ul>

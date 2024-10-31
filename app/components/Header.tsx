@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import Image from 'next/image'; // Import Image from next/image
 import '@fontsource/poppins/400.css'; // Ensure the Poppins font is imported
 
 const navItems = [
@@ -23,13 +24,16 @@ export default function Header() {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8 h-16"> {/* Increased navbar height */}
         <div className="flex justify-between items-center h-full">
           <Link href="/" className="flex items-center">
-            <img 
+            <Image
               src="/images/logo.png" // Path to your logo image
               alt="Logo"
               className="h-14 w-auto mr-3 object-contain" // Logo height, adjust as needed
+              width={56} // Set the width of your logo image
+              height={56} // Set the height of your logo image
               style={{ padding: '0', margin: '0' }} // Remove any default padding or margin
             />
           </Link>
+
           <div className="hidden md:flex space-x-6">
             {navItems.map((item) => (
               <Link
